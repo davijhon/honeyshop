@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load thumbnail %}
+{% load static %}
+
+{% block content %}
+      <div class="site-section">
+        <div class="container">
+            <div class="row mb-5">
+              <div class="col-md-12">
+                <div class="site-blocks-table">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th class="product-thumbnail text-center">{% trans "Image" %}</th>
+                        <th class="product-name text-center">{% trans "Product" %}</th>
+                        <th class="product-price text-center">{% trans "Price" %}</th>
+                        <th class="product-quantity text-center">{% trans "Quantity" %}</th>
+                        <th class="product-total text-center">Total</th>
+                        <th class="product-remove text-center">{% trans "Remove" %}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for order_item in object.items.all %}
+                        <tr>{% thumbnail order_item.item.image "150" as im %}
+                            <td class="product-thumbnail text-center">
+                              <img src="{% if im %}{{ im.url }}{% else %}{% static 'images/no_image.png' %}{% endif %}" alt="Image" class="img-fluid">
+                            </td>
+                          {% endthumbnail %}
+                          <td class="product-name text-center">
+                            <h2 class="h5 text-black">{{ order_item.item.name }}</h2>
+                          </td>
+                          <td class="text-center">{{ order_item.item.price }}</td>
+                          <td>
+                            <div class="input-group mb-3" style="max-width: 120px;">
+                              <div class="input-group-prepend text-center">
+                                <a href="{% url 'shop:remove-single-item-from-cart' order_item.item.slug %}"><button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button></a>
+                              </div>
+                              <input type="text" class="form-control text-center" value="{{ order_item.quantity }}" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                              <div class="input-group-append text-center">
+                                <a href="{% url 'shop:add-to-cart' order_item.item.slug %}"><button class="btn btn-outline-primary js-btn-plus text-center" type="button">&plus;</button></a>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="text-center">{{ order_item.get_total_items_price }}</td>
+                          <td class="text-center"><a href="{% url 'shop:remove-from-cart' order_item.item.slug %}" class="btn btn-primary btn-sm">X</a></td>
+                        </tr>
+                      {% empty %}
+                        <tr>
+                            <td colspan='5'>{% trans "Your cart is empty" %}
+                            </td>
+                        </tr>
+                      {% endfor %} 
+                    </tbody>
+                  </table>
+                </div>
+          </div>
+        </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="row mb-5">
+                <!--div class="col-md-6 mb-3 mb-md-0">
+                  <button class="btn btn-primary btn-sm btn-block">Update Cart</button>
+                </div-->
+                <div class="col-md-6">
+                  <a href="{% url 'shop:products' %}"><button class="btn btn-outline-primary btn-sm btn-block">{% trans "Continue Shopping" %}</button></a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 pl-5">
+              <div class="row justify-content-end">
+                <div class="col-md-7">
+                  <div class="row">
+                    <div class="col-md-12 text-right border-bottom mb-5">
+                      <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <span class="text-black">Subtotal</span>
+                    </div>
+                    <div class="col-md-6 text-right">
+                      <strong class="text-black">${{ object.get_total }}</strong>
+                    </div>
+                  </div>
+                  <div class="row mb-5">
+                    <div class="col-md-6">
+                      <span class="text-black">Total</span>
+                    </div>
+                    <div class="col-md-6 text-right">
+                      <strong class="text-black">${{ object.get_total }}</strong>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <a href="{% url 'shop:checkout' %}"><button class="btn btn-primary btn-lg py-3 btn-block">Proceed To Checkout</button></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock content %}

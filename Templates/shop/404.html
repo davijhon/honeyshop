@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+  <!-- Page Content -->
+  <div class="container">
+    <!-- Page Heading/Breadcrumbs -->
+    <div class="jumbotron">
+      <h1 class="display-4">404 Error</h1>
+      <p class="lead">{% trans "Sorry,This page is missing or does not exist" %}.</p>
+      <hr class="my-4">
+      <a class="btn btn-primary btn-lg" href="{% url 'shop:home' %}" role="button">Return</a>
+    </div>
+    <!-- /.jumbotron -->
+  </div>
+  <!-- /.container -->
+{% endblock content %}

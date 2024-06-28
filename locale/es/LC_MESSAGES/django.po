@@ -1,0 +1,126 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-06 18:08-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\Templates\account\email_confirm.html:7
+msgid "Confirm E-mail Address"
+msgstr "Confirme su E-mail"
+
+#: .\Templates\account\email_confirm.html:10
+msgid "Confirm E-email Address"
+msgstr "Confirme su E-mail"
+
+#: .\Templates\account\email_confirm.html:16
+#, python-format
+msgid ""
+"Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-email "
+"address for user %(user_display)s."
+msgstr ""
+
+#: .\Templates\account\email_confirm.html:20
+msgid "Confirm"
+msgstr ""
+
+#: .\Templates\account\email_confirm.html:27
+#, python-format
+msgid ""
+"This e-mail confirmation link expired or is invalid. Please<a href="
+"\"%(email_url)s\">issue a new e-mail confirmation request</a>."
+msgstr ""
+
+#: .\Templates\account\email_confirm_message.txt:2
+#, python-format
+msgid ""
+"Hello from %(site_name)s!\n"
+"You're receiving this e-mail because user %(user_display)s has given yours "
+"as an e-mail address to connect their account.\n"
+"\n"
+"To confirm this is correct, go to %(activate_url)s\n"
+msgstr ""
+
+#: .\Templates\account\email_confirm_message.txt:7
+#, python-format
+msgid ""
+"Thank you from %(site_name)s!\n"
+"%(site_domain)s"
+msgstr ""
+
+#: .\Templates\account\email_confirm_subject.txt:3
+msgid "Please Confirm Your Sign Up"
+msgstr ""
+
+#: .\Templates\base.html:61
+msgid "Cart"
+msgstr ""
+
+#: .\Templates\blog\contact.html:10
+msgid "Contact"
+msgstr ""
+
+#: .\Templates\blog\contact.html:21
+msgid "Contact Details"
+msgstr ""
+
+#: .\Templates\blog\contact.html:51
+msgid "Name"
+msgstr ""
+
+#: .\Templates\blog\contact.html:59
+msgid "Address"
+msgstr ""
+
+#: .\Templates\blog\contact.html:67
+msgid "Subject"
+msgstr ""
+
+#: .\Templates\blog\contact.html:75
+msgid "Message"
+msgstr ""
+
+#: .\Templates\shop\404.html:11
+msgid "Sorry,This page is missing or does not exist"
+msgstr ""
+
+#: .\Templates\shop\cart.html:15
+msgid "Image"
+msgstr ""
+
+#: .\Templates\shop\cart.html:16
+msgid "Product"
+msgstr ""
+
+#: .\Templates\shop\cart.html:17
+msgid "Price"
+msgstr "Precio"
+
+#: .\Templates\shop\cart.html:18
+msgid "Quantity"
+msgstr "Cantidad"
+
+#: .\Templates\shop\cart.html:20
+msgid "Remove"
+msgstr ""
+
+#: .\Templates\shop\cart.html:50
+msgid "Your cart is empty"
+msgstr ""
+
+#: .\Templates\shop\cart.html:67
+msgid "Continue Shopping"
+msgstr ""

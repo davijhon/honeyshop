@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <!-- Page Content -->
+  <div class="container">
+
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">Services</h1>
+    <!-- Image Header -->
+    <img class="img-fluid rounded mb-4" src="{% static 'images/servicios-apicultura.jpg' %}" alt="">
+
+    <section class="features-icons bg-light text-center">
+     <div class="container">
+       <div class="row mb-5">
+         <div class="col-sm-6">
+            <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+              <div class="features-icons-icon d-flex">
+                <i class="fas fa-dolly fa-3x text-warning"></i>
+              </div>
+            </div>
+         </div>
+         <div class="col-sm-6">
+            <h3>Venta de Miel a Granel</h3>
+             <p>
+              La misma calidad que ha hecho famosa nuestra marca “X” y que tanto gusta en las casas andaluzas, es la
+              que se envasa a granel para su venta mayor. Las mismas características que nuestra miel envasada que garantizan el sabor único y característico de nuestra excepcional miel.
+             </p>
+         </div>
+       </div>
+
+       <hr>
+       <div class="row">
+         <div class="col-sm-6">
+            <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+              <div class="features-icons-icon d-flex">
+                <i class="fas fa-wine-bottle fa-3x text-warning"></i>
+              </div>
+            </div>
+         </div>
+         <div class="col-sm-6">
+            <h3>Miel envasada</h3>
+             <p>
+              Nuestra marca “X” es un referente de calidad en la provincia y desde hace un año en Bélgica, Inglaterra y Francia.
+
+              El único proceso que hacemos en Naturmel (Miel y Solo Miel S.L.),  es eliminar impurezas antes de envasar la miel cruda y natural.
+             </p>
+         </div>
+     </div>
+    </section>
+  </div>
+  <!-- /.container -->
+{% endblock %}

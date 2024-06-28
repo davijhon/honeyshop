@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+  <!-- Page Content -->
+  <div class="container">
+
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">{{ post.titulo }}
+      <small>by
+        <a href="#">{{ post.autor }}</a>
+      </small>
+    </h1>
+
+    <div class="row">
+
+      <!-- Post Content Column -->
+      <div class="col-lg-8">
+
+        <!-- Preview Image -->
+        {% thumbnail post.imagen_referencial "700" as im %}
+          <img class="." src="{% if im %}{{ im.url }}{% else %}{% static 'images/no_image.png' %}{% endif %} "alt="">
+        {% endthumbnail %}
+        <hr>
+
+        <!-- Date/Time -->
+        <p>{{ post.fecha_publicacion }}</p>
+
+        <hr>
+
+        <!-- Post Content -->
+        <p class="lead">{{ post.descripcion }}</p>
+        <p class="lead">{{ post.contenido|safe }}</p>
+        <hr>
+        <div class="container">
+          <div id="disqus_thread"></div>
+        </div>
+
+
+      </div>
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-4">
+
+        <!-- Search Widget -->
+          <div class="card mb-4">
+            <h5 class="card-header">Search</h5>
+            <div class="card-body">
+              <form class="." action="{% url 'blog:search_results' %}" method="get">
+                <div class="input-group">
+                  <input name="q" type="text" class="form-control" placeholder="Search Posts...">
+                    <span class="input-group-btn">
+                      <button class="btn btn-secondary" type='submit'>Go!</button>  
+                    </span> 
+                </div>
+              </form>
+            </div>
+          </div>
+
+                 <!-- Categories Widget -->
+          <div class="card my-4">
+            <h5 class="card-header">Categories</h5>
+            <div class="card-body">
+              <div class="row">
+                {% for category in categories %}
+                  <div class="col-lg-6">
+                    <ul class="list-unstyled mb-0">
+                      <li>
+                        <a href="{% url 'blog:category' category.pk %}">{{ category.nombre }}</a>
+                      </li>
+                    </ul>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+
+
+        <!-- Side Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Side Widget</h5>
+          <div class="card-body">
+            You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+{% endblock content %}
+
+{% block extra_scripts %}
+  <script>
+
+        /**
+        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+        /*
+        var disqus_config = function () {
+        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+        */
+        (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://honeyshop.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+{% endblock extra_scripts %}
+  

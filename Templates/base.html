@@ -1,0 +1,170 @@
+{% load static %}
+{% load i18n %}
+{% load cart_template_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  {% block extra_head %}
+	  {% endblock extra_head %}
+	  <meta name="description" content="">
+	  <meta http-equiv="x-ua-compatible" content="ie=edge">
+	  <meta name="author" content="">
+
+	  <title>Modern Business - Start Bootstrap Template</title>
+
+	  <!-- Bootstrap core CSS -->
+	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+	</head>
+	<body>
+		<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+			<div class="container">
+			  <a class="navbar-brand" href="{% url 'shop:home' %}">HoneyShop</a>
+			  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			  </button>
+			  <div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					  <li class="nav-item">
+						<a class="nav-link" href="{% url 'shop:home' %}">Inicio</a>
+					  </li>
+					  <li class="nav-item">
+						<a class="nav-link" href="{% url 'shop:services' %}">Servicios</a>
+					  </li>
+					  <li class="nav-item">
+						<a class="nav-link" href="{% url 'blog:blog' %}">Blog</a>
+					  </li>
+					  <li class="nav-item">
+						<a class="nav-link" href="{% url 'blog:contact' %}">Contactos</a>
+					  </li>
+					  <li class="nav-item">
+							<a class="nav-link waves-effect" href="{% url 'shop:cart' %}">
+								<span class="badge red z-depth-1 mr-1">{{ request.user|cart_item_count }}</span>
+								<i class=" fas fa-shopping-cart"></i>
+								<span class="clearfix d-none d-sm-inline-block"> {% trans "Cart" %}</span>
+							</a>
+					  </li>
+					  {% if user.is_authenticated %}
+						<li class="nav-dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								{{ user.username }}
+							</a>
+							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+								<a class="dropdown-item" href="{% url 'account_change_password' %}">Change password</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="{% url 'account_logout' %}">Log Out</a>
+							</div>
+						</li>	          
+					  {% else %}
+						<form class="form-inline ml-auto">
+							<a href="{% url 'account_login' %}" class="btn btn-outline-secondary">Log In</a>
+							<a href="{% url 'account_signup' %}" class="btn btn-primary ml-2">Sign up</a>
+						</form>
+					  {% endif %}
+				</ul>
+			  </div>
+			</div>
+		  </nav>
+		  <div class="messages">
+				{% if messages %}
+				  {% for message in messages %}
+				   <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+					  {{ message }}
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					  </button>
+					</div>
+				  {% endfor %}
+				{% endif %}
+		   </div>
+
+		<!-- BodyBlock Content -->
+
+			{% block content %}
+			{% endblock %}
+	  <footer>
+		<footer class="page-footer font-small brown bg-dark pt-4 mt-4">
+		  <div class="container-fluid text-center text-md-left">
+			<div class="row">
+			  <div class="col-md-6 mt-md-0 mt-3">
+				<h5 class="text-uppercase text-white">Honeyshop</h5>
+				<p class="text-light">Miel 100% natural & artesanal. Del panal a tu mesa.En dulzate la vida..</p>
+					<div class="col-md-6 mt-md-0 mt-3">
+					<div class="card-body">
+					  <form action="{% url 'blog:suscribirse' %}" method="post">
+					  	{% csrf_token %}
+							<h5><label class="footer-heading text-white">Subscribe</label></h5>
+							<div class="form-group">		
+								<input name="correo" type="text" class="form-control py-4"  placeholder="Email">
+								<button type="submit" class="btn btn-primary text-white">SUSCRIBIRSE</button>
+							</div>
+					  </form>
+					</div>
+				</div>
+			  </div>
+			  <hr class="clearfix w-100 d-md-none pb-3">
+
+			  <div class="col-md-3 mb-md-0 mb-3">
+				  <h5 class="text-uppercase text-white">Acerca de</h5>
+				  <ul class="list-unstyled">
+					<li>
+					  <a href="{% url 'blog:FAQ' %}">FAQ</a>
+					</li>
+					<li>
+					  <a href="#!">Politicas de devolucion</a>
+					</li>
+					<li>
+					  <a href="#!">Mision</a>
+					</li>
+					<li>
+					  <a href="#!">Vision</a>
+					</li>
+				  </ul>
+				</div>
+				<div class="col-md-3 mb-md-0 mb-3">
+				  <h5 class="text-uppercase text-white">Siguenos</h5>
+				  <ul class="list-unstyled">
+					<li>
+					  <a href="https://www.facebook.com/">Facebook</a>
+					</li>
+					<li>
+					  <a href="https://www.instagram.com/">Instagram</a>
+					</li>
+					<li>
+					  <a href="https://twitter.com/">Tweeter</a>
+					</li>
+					<li>
+					  <a href="https://www.youtube.com/">Youtube</a>
+					</li>
+				  </ul>
+				</div>
+			</div>
+		  </div>
+
+		  <div class="footer-copyright text-center py-3 text-white">© 2020 Copyright:
+			<a href="#"> DaviJhon</a>
+		  </div>
+		</footer>
+	  </footer>
+
+		  <!-- Bootstrap core JavaScript -->
+		   <script src="https://kit.fontawesome.com/5d6a0adb14.js" crossorigin="anonymous"></script>  
+		  <!-- <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>   -->
+		<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+			      <!-- Bootstrap JS -->
+		<script src="{% static 'js/bootstrap.min.js' %}"></script>
+			      <!-- Popper JS -->
+	<script src="{% static 'js/popper.min.js' %}"></script>
+			      <!-- Font Awesome -->
+		<script src="{% static 'js/all.min.js' %}"></script>
+		  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+		  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		  {% block extra_scripts %}
+		  {% endblock extra_scripts %}
+	</body>
+</html>

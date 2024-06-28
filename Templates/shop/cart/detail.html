@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load thumbnail %}
+{% load static %}
+
+{% block content %}
+      <div class="site-section carrito">
+        <div class="container cart-container">
+            <div class="row mb-5">
+              <div class="col-md-12">
+                <div class="site-blocks-table">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th class="product-thumbnail text-center">{% trans "Image" %}</th>
+                        <th class="product-name text-center">{% trans "Product" %}</th>
+                        <th class="product-price text-center">{% trans "Price" %}</th>
+                        <th class="product-quantity text-center">{% trans "Quantity" %}</th>
+                        <th class="product-total text-center">Total</th>
+                        <th class="product-remove text-center">{% trans "Remove" %}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for item in cart %}
+                        {% with product=item.product %}
+                                    <tr>
+                                      <td class="product-thumbnail text-center">
+                                        <a href="{{ product.get_absolute_url }}"><img  src="{% if im %}{{ im.url }}{% else %}{% static 'images/no_image.png' %}{% endif %}" alt="Image" class="img-fluid"></a>
+                                      </td>
+                                      <td class="product-name text-center">
+                                        <h2 class="h5 text-black">{{ product.name }}</h2>
+                                      </td>
+                                      <td class="text-center">{{ item.price }}</td>
+                                      <td>
+                                        {{ product.quantity }}
+                                        <form action="{#% url 'cart:cart_add' product.id %#}" method="post">
+                                          {{ item.update_quantity_form.quantity }}
+                                          {{ item.update_quantity_form.update }}
+                                          {% csrf_token %}
+                                          <input type="submit" value="Update">
+                                        </form>
+                                      </td>
+                                      <td class="text-center">{{ item.total_price }}</td>
+                                      <td class="text-center"><a href="{% url 'cart:cart_remove' product.id %}" class="btn btn-primary btn-sm">X</a></td>
+                                    </tr>
+                                  {#% empty %#}
+                                    <!-- <tr>
+                                        <td colspan='5'>{#% trans "Your cart is empty" %#}
+                                        </td>
+                                    </tr> -->
+                        {% endwith %}
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+          </div>
+        </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="row mb-5">
+                <!--div class="col-md-6 mb-3 mb-md-0">
+                  <button class="btn btn-primary btn-sm btn-block">Update Cart</button>
+                </div-->
+                <div class="col-md-6">
+                  <a href="{% url 'shop:products' %}"><button class="btn btn-outline-primary btn-sm btn-block">{% trans "Continue Shopping" %}</button></a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 pl-5">
+              <div class="row justify-content-end">
+                <div class="col-md-7">
+                  <div class="row">
+                    <div class="col-md-12 text-right border-bottom mb-5">
+                      <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <span class="text-black">Subtotal</span>
+                    </div>
+                    <div class="col-md-6 text-right">
+                      <strong class="text-black">${#{ item.total_price }#}</strong>
+                    </div>
+                  </div>
+                  <div class="row mb-5">
+                    <div class="col-md-6">
+                      <span class="text-black">Total</span>
+                    </div>
+                    <div class="col-md-6 text-right">
+                      <strong class="text-black">${{ cart.get_total_price }}</strong>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <a href="{% url 'shop:checkout' %}"><button class="btn btn-primary btn-lg py-3 btn-block">Proceed To Checkout</button></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock content %}

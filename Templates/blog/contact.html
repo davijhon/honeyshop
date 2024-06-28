@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load thumbnail %}
+{% load static %}
+
+{% block content %}
+<!-- Page Content -->
+
+    <!-- Page Heading/Breadcrumbs -->
+  <div class="container">
+    <h1 class="mt-4 mb-3">{% trans "Contact" %}
+    </h1>
+    <!-- Content Row -->
+    <div class="row">
+      <!-- Map Column -->
+      <div class="col-lg-8 mb-4">
+        <!-- Embedded Google Map -->
+        <iframe class="detail-map" width="100%" height="400px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?hl=en&amp;ie=UTF8&amp;ll=37.0625,-95.677068&amp;spn=56.506174,79.013672&amp;t=m&amp;z=4&amp;output=embed"></iframe>
+      </div>
+      <!-- Contact Details Column -->
+      <div class="col-lg-4 mb-4">
+        <h3>{% trans "Contact Details" %}</h3>
+        <p>
+          {{ contact.direccion }}
+          <br>{{ contact.direccion }}
+          <br>
+        </p>
+        <p>
+          <i class="fas fa-mobile-alt"></i> {{ contact.telefono }}
+        </p>
+        <p>
+          <i class="fas fa-at"></i>
+          <a href="#">{{ contact.email }}
+          </a>
+        </p>
+        <p>
+          <i class="far fa-clock"></i> Monday - Friday: 9:00 AM to 5:00 PM
+        </p>
+      </div>
+    </div>
+    <!-- /.row -->
+
+    <!-- Contact Form -->
+    <!-- In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
+
+      <div class="col-lg-8 mb-4">
+        <h3>Send us a Message</h3>
+        <form method="POST" name="sentMessage">
+          {% csrf_token %}
+            <div class="control-group form-group">
+              <div class="controls">
+                <label>Full {% trans "Name" %}:</label>
+                {{ form.nombre }}
+                <!--input type="text" class="form-control" id="name" required data-validation-required-message="Please enter your name."-->
+                <p class="help-block"></p>
+              </div>
+            </div>
+            <div class="control-group form-group">
+              <div class="controls">
+                <label>Email {% trans "Address" %}:</label>
+                {{ form.correo }}
+                <!--input type="email" class="form-control" id="email" required data-validation-required-message="Please enter your email address.">
+              </div-->
+              <p class="help-block"></p>
+            </div>
+            <div class="control-group form-group">
+              <div class="controls">
+                <label>{% trans "Subject" %}:</label>
+                {{ form.asunto }}
+                <!--input type="email" class="form-control" id="email" required data-validation-required-message="Please enter your email address.">
+              </div-->
+              <p class="help-block"></p>
+            </div>
+            <div class="control-group form-group">
+              <div class="controls">
+                <label>{% trans "Message" %}:</label>
+                {{ form.mensaje }}
+              </div>
+            </div>
+            <!-- For success/fail messages -->
+            <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+      </div>
+    </div>
+    <!-- /.row -->
+
+
+{% endblock content %}

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% load static %}
+
+
+{% block content %}
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">Products</h1>
+
+      <div class="row">
+        {% for product in products %}
+            <div class="col-lg-6 portfolio-item">
+              <div class="card h-100">
+                {% thumbnail product.image "700" as im %}
+                  <a href="{{ product.get_absolute_url }}"><img class="card-img-top" src="{% if im.url %}{{ im.url }}{% else %}{% static 'images/no_image.png' %}{% endif %}" alt=""></a>
+                {% endthumbnail %}
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+                  </h4>
+                  <h5>${{ product.price }}</h5>
+                  <p class="card-text">{{ product.description }}</p>
+                </div>
+              </div>
+            </div>
+         {% endfor %}
+     </div>
+    <!-- /.row -->
+
+    <!-- Pagination -->
+        <div class="pagination justify-content-center mb-4">
+            <span class="step-links">
+              {% if page_obj.has_previous %}
+                <a href="?page=1"></a>
+                <li class="page-item">
+                  <a class="page-link" aria-label="Previous" href="?page={{ page_obj.previous_page_number }}">Previews</a>
+                </li>
+              {% endif %}
+              <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+              </span>
+              {% if page_obj.has_next %}
+              <li class="page-item">
+                  <a href="?page={{ page_obj.next_page_number }}">Next</a>
+                  <a href="?page={{ page_obj.paginator.num_pages }}">last</a>
+              </li>
+              {% endif %}
+            </span> 
+          </div>
+
+  </div>
+  <!-- /.container -->
+
+{% endblock %}
